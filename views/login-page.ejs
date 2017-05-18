@@ -1,0 +1,17 @@
+<%- include partials/header.ejs %>
+<div class="container">
+  <h5> <%= msg %> </h5>
+  <form class="form-group"  action="/users/login" method="post">
+    <h3>Masukkan Username dan Password</h3>
+    <br>
+    <input type="text" name="logUsername" placeholder="Username" value="">
+    <br><br>
+    <input  type="password" name="logPassword" placeholder="Password" value="">
+    <br><br>
+    <input type="submit" value="Sign In!">
+
+  </form>
+</div>
+
+</body>
+</html>

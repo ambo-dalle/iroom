@@ -1,11 +1,11 @@
-<%- include partials/header.ejs %>
+<%- include partials/header-logge-in.ejs %>
 <div class="container">
 
   <div class="form-group">
     <div class="form-group">
       <div class="form-group">
       <h2 class="form-group">Add New Rooms</h2>
-      <form method="post" enctype="multipart/form-data" action="/users">
+      <form method="post" enctype="multipart/form-data" action="/rooms/upload/">
         <label for="add room">Room Name</label>
       <input  class="form-control" type="text" name="room_name" placeholder="Nama Tempat" /><br />
         <label for="add room">Description</label>
