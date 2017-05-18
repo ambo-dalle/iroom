@@ -139,8 +139,12 @@ router.get('/vote/:id', (req,res,next) =>{
 
 
 router.get('/getRoomById', (req,res,next) =>{
-  let id = req.params.id
-  models.Rooms.findById(id, {
+  let id = req.body.lokasi
+  models.Rooms.findOne({
+    where: {
+      lokasi: id
+    }
+  }, {
     include : [models.Vote]
   })
   .then(room =>{
