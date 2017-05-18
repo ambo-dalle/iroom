@@ -1,0 +1,45 @@
+<%- include partials/header.ejs %>
+
+
+  <div class="navigation">
+    <ul>
+      <li>
+        <form action="/" method="GET">
+          <input type="submit" value="Beranda">
+        </form>
+      </li>
+      <li id="logo">i-ROOMS</li>
+      <li>
+        <form action="/post" method="POST">
+          <input type="submit" value="Daftar Postingan">
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  <div class="create_post">
+    <div class="products">
+      <div class="product">
+        <h3><%- room.room_name%></h3>
+        <img class="place" src="<%- room.imagePath%>" alt="<%- room.room_name%>">
+        <p><%- room.description%></p>
+        <a href="/vote/<%- room.id%>"><img src="/images/heart.png" alt="Like"></a>&nbsp;&nbsp;
+        <h4>
+          <% if (room.Vote) { %>
+              <%= room.Vote.count %>&nbsp;likes
+          <% } else {%>
+            <%= 0 %>&nbsp;likes
+          <%}%>
+        </h4>
+        <br><br>
+        <a href="/edit/<%- room.id%>"><img src="/images/edit.png" alt="Edit"></a>
+        <a href="/places/delete/<%- room.id%>" onclick="return confirm('Are you sure want to delete this place?')"><img src="/images/delete.png" alt="Delete" height="30px" width="30px"></a>
+      </div>
+    </div>
+  </div>
+
+
+  <h3>Mari bersama-sama memajukan sektor pariwisata Indonesia</h3>
+
+</body>
+</html>

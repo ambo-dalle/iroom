@@ -1,0 +1,55 @@
+<%- include partials/header.ejs %>
+
+<div class="container">
+
+  <h3>Mencari Tempat Penginapan Jadi Lebih Cepat</h3>
+
+
+
+  <% rooms.forEach(tampil=>{  %>
+      <div class="col-md-6">
+
+        <div class="thumbnail">
+          <a href="getRoomById/<%- tampil.id%>"><img class="place" src="<%- tampil.imagePath%>" alt="<%- tampil.room_name%>"></a>
+          <div class="caption">
+            <h3><%=tampil.room_name%></h3>
+
+            <br>
+            <%=tampil.description%>
+
+            <div class="text-center">
+            <a href="/detail/<%= tampil.id %>" class="btn btn-warning">Lihat Detail</a>
+            <a href="#" class="btn btn-secondary">Masukkan ke keranjang</a>
+
+    <div class="col-md4">
+      <a href="/edit/<%- tampil.id%>"><img src="/images/edit.png" alt="Edit"></a>
+      <a href="/rooms/delete/<%- tampil.id%>" onclick="return confirm('Are you sure want to delete this place?')"><img src="/images/delete.png" alt="Delete" height="30px" width="30px"></a>
+      <a href="/vote/<%- tampil.id%>"><img src="/images/fbheart.png" alt="Like"></a>&nbsp;&nbsp;
+      <h4>
+        <% if (tampil.Vote) { %>
+            <%= tampil.Vote.count %>&nbsp;likes
+        <% } else {%>
+          <%= 0 %>&nbsp;likes
+        <%}%>
+      </h4>
+    </div>
+          </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+    <%  }) %>
+
+
+   </div>
+
+
+
+ </div>
+
+
+<%- include partials/footer.ejs %>

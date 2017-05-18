@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>i-ROOMS</title>
+  <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+  <div class="navigation">
+    <ul>
+      <li>
+        <form action="/" method="GET">
+          <input type="submit" value="Beranda">
+        </form>
+      </li>
+      <li id="logo">i-ROOMS</li>
+      <li>
+        <form action="/post" method="POST">
+          <input type="submit" value="Daftar Postingan">
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  <div id="cover2">
+    <div class="cover-content">
+      <h1>Penginapan</h1>
+      <form action="/create" method="POST">
+          <button type="submit" name="button" class="btn">Tambah Postingan Baru</button>
+      </form><br>
+      <form action="/upload" method="POST">
+          <button type="submit" name="button" class="btn">Postingan Baru</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="products">
+    <h3 class="blue"><%- title%></h3>
+    <%
+    if (dataPosts.length < 1) {
+    %>
+    <h3 class="blue">Data tidak ada</h3>
+    <%
+    } else {
+    let no = 1;
+    dataPosts.forEach(post => {
+      if(post.Rooms !== null){
+    %>
+    <div class="product">
+      <img class="place" src="<%- post.Rooms.imagePath%>" alt="<%- post.Rooms.room_name%>">
+      <h3><%- post.Rooms.room_name%></h3>
+      <h4><%- post.title%></h4>
+      <h5>Posted at: <%- post.createdAt%></h5>
+      <p><%- post.description%></p>
+      <a href="/posts/edit_post/<%- post.id%>"><img src="/images/edit.png" alt="Edit"></a>
+      <a href="/posts/delete/<%- post.id%>" onclick="return confirm('Are you sure want to delete this post?')"><img src="/images/delete.png" alt="Edit"></a>
+    </div>
+    <%
+        no++;
+      }
+      })
+    }
+    %>
+  </div>
+
+  <h3>Dreams Come True</h3>
+
+</body>
+</html>

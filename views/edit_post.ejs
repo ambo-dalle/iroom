@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>i-ROOMS</title>
+  <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+  <div class="navigation">
+    <ul>
+      <li>
+        <form action="/" method="GET">
+          <input type="submit" value="Beranda">
+        </form>
+      </li>
+      <li id="logo">i-ROOM</li>
+      <li>
+        <form action="/post" method="POST">
+          <input type="submit" value="Daftar Postingan">
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  <div class="create_post">
+    <div class="products">
+      <div class="form-style-6">
+      <p class="text_update">Edit Post</p>
+      <form method="post" action="/post/edit_post/<%- id%>">
+      <input type="text" name="title" placeholder="Topik" value="<%- dataRoom.title%>"/>
+      <textarea name="description" placeholder="Masukkan deskripsi room anda"><%- dataPost.description%></textarea>
+      <select name="place">
+        <% dataRoom.forEach(room => { %>
+          <% if(room.id == dataPost.placeId) {%>
+            <option value="<%- place.id%>" selected> <%- room.room_name %> </option>
+            <% } else {%>
+              <option value="<%- place.id%>"> <%- room.room_name %> </option>
+              <% } %>
+        <% }) %>
+      </select>
+      <input type="submit"name="sumbit" value="Edit" />
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <h3>ir Room Simple</h3>
+
+</body>
+</html>

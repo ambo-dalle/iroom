@@ -1,0 +1,24 @@
+<%- include partials/header.ejs %>
+<div class="container">
+
+  <div class="form-group">
+    <div class="form-group">
+      <div class="form-group">
+      <h2 class="form-group">Add New Rooms</h2>
+      <form method="post" enctype="multipart/form-data" action="/users">
+        <label for="add room">Room Name</label>
+      <input  class="form-control" type="text" name="room_name" placeholder="Nama Tempat" /><br />
+        <label for="add room">Description</label>
+      <textarea class="form-control" rows="4" name="description" placeholder="Input Description Rooms"></textarea><br />
+      <input class="form-control" type="text" name="lokasi" value="" placeholder="Lokasi"> <br />
+      <label class="form-group" for="file">Input file:</label>
+      <input class="form-group" type="file" name="urlPath">
+      <input class="btn btn-success btn-lg" type="submit" name="sumbit" value="Create" />
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <%- include partials/footer.ejs %>
