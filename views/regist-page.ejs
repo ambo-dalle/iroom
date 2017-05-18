@@ -1,0 +1,26 @@
+<%- include partials/header.ejs %>
+<div class="container">
+  <h5><%=msg%></h5>
+  <br><br>
+  <form class="form-group"  action="/users/register" method="post">
+    <h3>Silahkan di isi dengan Valid!</h3>
+    <input type="text" name="newName" placeholder="Nama" value="">
+    <br><br>
+    <input  type="text" name="newUsername" placeholder="Username" value="">
+    <input  type="password" name="newPassword" placeholder="Password" value="">
+    <br><br>
+    <input  type="email" name="newEmail" placeholder="Email" value="">
+    <input  type="text" name="newTelp" placeholder="Telp" value="">
+    <br><br>
+    <input type="submit" value="Sign Up and Log In">
+
+  </form>
+</div>
+
+<form class="" action="/users/coba" method="post">
+  <input type="file" name="imageUpload">
+  <input type="submit">
+</form>
+
+</body>
+</html>
