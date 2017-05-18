@@ -18,6 +18,15 @@ router.get('/', function(req, res, next) {
   })
 });
 
+
+router.get('/detail/:id', (req,res,next)=>{
+  const item = models.Rooms.find(i =>{
+    return i.id === req.params.id
+  })
+  res.render('detail', {items : item})
+})
+
+
 router.get('edit/:id', (req,res,next) =>{
   let id = req.params.id
   models.Rooms.findById(id)
@@ -116,5 +125,9 @@ router.get('/getRoomById', (req,res,next) =>{
     console.log(err.message);
   })
 })
+
+
+
+
 
 module.exports = router;

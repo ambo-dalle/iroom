@@ -45,10 +45,13 @@ router.get('/delete/:id', (req,res,next) =>{
   })
 })
 
-router.post('/edit/:id', (req,res,next) =>{
+router.post('/update/:id', (req,res,next) =>{
   let id = req.params.id
+  console.log("Ini Req"+ req);
   let tempUrlPath = req.files[0].path
+  console.log("Ini tempUrlPath" + tempUrlPath);
   let resultPath = tempUrlPath.replace('public', '')
+  console.log("ini resultPath" + resultPath);
   models.Rooms.update({
     room_name : req.body.room_name,
     description : req.body.description,
@@ -56,7 +59,7 @@ router.post('/edit/:id', (req,res,next) =>{
     lokasi : req.body.lokasi
   }, {
     where : {
-      id : id
+      id : req.params.id
     }
   })
   .then(() =>{
@@ -64,6 +67,22 @@ router.post('/edit/:id', (req,res,next) =>{
   })
   .catch((err) => {
     console.log(err);
+  })
+})
+
+
+
+router.get('/edit/:id', function(req,res,next) {
+  models.Rooms.findOne({
+    where :  {
+      id : req.params.id
+    }
+  })
+  .then(function(rooms) {
+    console.log(rooms)
+    res.render('edit_room', {
+      dataRoom : rooms
+    })
   })
 })
 
