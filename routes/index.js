@@ -4,8 +4,13 @@ var models = require('../models')
 
 /* GET home page. */
 router.use(function(req, res, next) {
+<<<<<<< HEAD
   // let pathNeedLogin = ['/']
   let pathNeedLogOut = ['users/login', 'users/register', '/']
+=======
+  // let pathNeedLogin = ['/home', '/']
+  let pathNeedLogOut = ['/login',  '/register', '/']
+>>>>>>> bf7f5909985fb1b82fdb71b4454d4d7645181a84
   console.log(`-------------------req.session.user = ${req.session.user}`)
   let currentUser = req.session.user
   console.log(`-------------------currentUser = ${currentUser}`)
@@ -44,6 +49,15 @@ router.get('/', function(req, res, next) {
     console.log(err.message);
   })
 });
+
+
+router.get('/detail/:id', (req,res,next)=>{
+  const item = models.Rooms.find(i =>{
+    return i.id === req.params.id
+  })
+  res.render('detail', {items : item})
+})
+
 
 router.get('edit/:id', (req,res,next) =>{
   let id = req.params.id
@@ -130,8 +144,12 @@ router.get('/vote/:id', (req,res,next) =>{
 
 
 router.get('/getRoomById', (req,res,next) =>{
-  let id = req.params.id
-  models.Rooms.findById(id, {
+  let id = req.body.lokasi
+  models.Rooms.findOne({
+    where: {
+      lokasi: id
+    }
+  }, {
     include : [models.Vote]
   })
   .then(room =>{
@@ -143,5 +161,9 @@ router.get('/getRoomById', (req,res,next) =>{
     console.log(err.message);
   })
 })
+
+
+//Cekasasasasas
+
 
 module.exports = router;

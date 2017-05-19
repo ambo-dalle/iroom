@@ -19,12 +19,20 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf7f5909985fb1b82fdb71b4454d4d7645181a84
 app.set('trust proxy', 1)
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
 }))
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf7f5909985fb1b82fdb71b4454d4d7645181a84
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,6 +43,13 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/rooms', rooms);
 app.use('/posts', posts);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

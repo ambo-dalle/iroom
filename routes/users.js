@@ -7,8 +7,14 @@ var upload = multer({
 })
 var sequelize = require('sequelize')
 /* GET users listing. */
+<<<<<<< HEAD
 router.use(function(req, res, next) {
   let pathNeedLogin = ['/home', '/', '/cari_kamar/', '/cari_kamar']
+=======
+
+router.use(function(req, res, next) {
+  let pathNeedLogin = ['/home', '/']
+>>>>>>> bf7f5909985fb1b82fdb71b4454d4d7645181a84
   let pathNeedLogOut = ['/login', '/register']
   console.log(`-------------------req.session.user = ${req.session.user}`)
   let currentUser = req.session.user
@@ -159,5 +165,90 @@ router.get('/cari_kamar/', function(req, res, next) {
     }
   })
 })
+
+router.get('/login', function(req, res, next) {
+  res.render('login-page.ejs', {msg: ""})
+})
+
+router.post('/login', function(req, res, next) {
+  let currentUser = req.body.logUsername;
+  let currentPass = req.body.logPassword;
+  models.User.findOne({
+    where: {
+      username: currentUser
+    }
+  }).then((user) => {
+    if (!user) {
+      res.render('login-page.ejs', {msg: "Username tidak di temukan bro!"})
+    } else if (user.password != currentPass) {
+      res.render('login-page.ejs', {msg: "Password salah bro!"})
+    } else if (user.password == currentPass) {
+      req.session.user = {username: currentUser}
+      console.log(`------------dari post login---------${req.session.user.username}`)
+      res.redirect('/users/home')
+    }
+  })
+})
+
+router.get('/logout', function(req, res, next) {
+  delete req.session.user
+  res.redirect('login')
+})
+
+router.get('/home', function(req, res, next) {
+  models.Rooms.findAll({
+      include : [models.Vote]
+    })
+    .then(rooms =>{
+      res.render('home-login', {
+        title : 'Daftar Tempat Penginapan',
+        rooms : rooms
+      })
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
+})
+
+router.get('/register', function(req, res, next) {
+  res.render('regist-page.ejs', {msg: ""})
+})
+
+router.post('/register', function(req, res, next) {
+  let newName = req.body.newName
+  let newUsername = req.body.newUsername
+  let newPass = req.body.newPassword
+  let newEmail = req.body.newEmail
+  let newTelp = req.body.newTelp
+  models.User.findOne({
+    where: sequelize.or({
+      username: newUsername},{
+      email: newEmail
+    })
+  }).then( user => {
+    if (!user) {
+      models.User.create({
+        name: newName,
+        username: newUsername,
+        password: newPass,
+        email: newEmail,
+        telp: newTelp,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }).then( () => {
+        res.render('login-page', {msg: "Akun berhasil di buat, silahkan log in!"})
+      })
+    } else {
+      res.render('regist-page', {msg: "Username atau Password sudah terpakai!"})
+    }
+  })
+})
+
+router.post('/coba', function(req,res,next) {
+  let imagekah = req.body.imageUpload
+  console.log(imagekah)
+})
+
+
 
 module.exports = router;
