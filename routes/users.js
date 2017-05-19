@@ -137,11 +137,23 @@ router.post('/register', function(req, res, next) {
   })
 })
 
-router.post('/coba', function(req,res,next) {
-  let imagekah = req.body.imageUpload
-  console.log(imagekah)
+router.get('/cari_kamar/', function(req, res, next) {
+  let keyword = req.query.key
+  models.Rooms.findAll({
+    where: sequelize.or({
+      lokasi: keyword
+    }, {
+      room_name: keyword
+    })
+  }).then( data => {
+    if (data.length > 0) {
+      console.log('data = ' + data)
+      res.render('search-result', {data: data, msg: `Berikut daftar kamar berdasarkan '${keyword}':`})
+    } else {
+      console.log('keywords = ' + keyword)
+      res.render('search-result', {data: data, msg: `Tidak ada kamar yang ditemukan dengan berdasarkan '${keyword}'`})
+    }
+  })
 })
-
-
 
 module.exports = router;

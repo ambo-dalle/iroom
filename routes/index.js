@@ -47,8 +47,8 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/detail/:id', (req,res,next)=>{
-  const item = models.Rooms.find(i =>{
-    return i.id === req.params.id
+  const item = tampil.find(i =>{
+    return i.id === parseInt(req.params.id)
   })
   res.render('detail', {items : item})
 })
@@ -138,25 +138,41 @@ router.get('/vote/:id', (req,res,next) =>{
 })
 
 
-router.get('/getRoomById', (req,res,next) =>{
-  let id = req.body.lokasi
+// router.get('/getRoomById', (req,res,next) =>{
+//   let id = req.body.lokasi
+//   models.Rooms.findOne({
+//     where: {
+//       lokasi: id
+//     }
+//   }, {
+//     include : [models.Vote]
+//   })
+//   .then(room =>{
+//     res.render('home', {
+//       room : room
+//     })
+//   })
+//   .catch((err) => {
+//     console.log(err.message);
+//   })
+// })
+
+
+router.get('/search', (req,res,next)=>{
   models.Rooms.findOne({
-    where: {
-      lokasi: id
+    where : {
+      namapenginapan : req.body.room_name
     }
-  }, {
-    include : [models.Vote]
   })
   .then(room =>{
-    res.render('home', {
-      room : room
+    res.render('index', {
+      rooms : room
     })
   })
   .catch((err) => {
     console.log(err.message);
   })
 })
-
 
 //Cekasasasasas
 
