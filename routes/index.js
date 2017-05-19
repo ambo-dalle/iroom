@@ -3,6 +3,33 @@ var router = express.Router();
 var models = require('../models')
 
 /* GET home page. */
+router.use(function(req, res, next) {
+  // let pathNeedLogin = ['/']
+  let pathNeedLogOut = ['users/login', 'users/register', '/']
+  console.log(`-------------------req.session.user = ${req.session.user}`)
+  let currentUser = req.session.user
+  console.log(`-------------------currentUser = ${currentUser}`)
+
+  let currentPath = req.path
+
+  // if (pathNeedLogin.includes(currentPath)) {
+  //   if (!currentUser) {
+  //     res.render('login-page', {msg: "Login dlu coy!"})
+  //   } else {
+  //     next()
+  //   }
+  // } else
+  if (pathNeedLogOut.includes(currentPath)){
+    if (currentUser) {
+      res.redirect('/users/home')
+    } else {
+      res.redirect('/users/login')
+    }
+  } else {
+    next()
+  }
+})
+
 router.get('/', function(req, res, next) {
   models.Rooms.findAll({
     include : [models.Vote]
